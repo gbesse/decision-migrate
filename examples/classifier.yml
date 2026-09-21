@@ -1,0 +1,45 @@
+# Purpose: Minimal authored Dify DSL 0.3.1 classifier example with two preserved branches; synthetic sample data only.
+app:
+  name: Support triage migration
+  mode: workflow
+  description: Classify a support request
+kind: app
+version: 0.3.1
+dependencies: []
+workflow:
+  graph:
+    nodes:
+      - id: start
+        type: custom
+        data:
+          type: start
+          variables:
+            - variable: query
+              type: text-input
+              required: true
+      - id: classifier
+        type: custom
+        data:
+          type: question-classifier
+          title: Support department
+          query_variable_selector: [start, query]
+          instruction: Select the department responsible for this request.
+          vision: {enabled: false}
+          model:
+            provider: langgenius/openai/openai
+            name: gpt-4o-mini
+            mode: chat
+            completion_params: {temperature: 0}
+          classes:
+            - {id: billing, name: Invoices and billing}
+            - {id: technical, name: Technical problems}
+      - id: billing-end
+        type: custom
+        data: {type: end, title: Billing, outputs: []}
+      - id: technical-end
+        type: custom
+        data: {type: end, title: Technical, outputs: []}
+    edges:
+      - {id: start-classifier, source: start, sourceHandle: source, target: classifier, targetHandle: target}
+      - {id: billing-edge, source: classifier, sourceHandle: billing, target: billing-end, targetHandle: target}
+      - {id: technical-edge, source: classifier, sourceHandle: technical, target: technical-end, targetHandle: target}

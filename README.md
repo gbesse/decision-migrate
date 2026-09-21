@@ -33,3 +33,5 @@ Uses DecisionPacks for validated finite inference and Decision Workbench for its
 - [Dify DSL fixture](https://github.com/langgenius/dify/blob/main/api/tests/fixtures/workflow/basic_chatflow.yml).
 
 Reviewed 2026-09-21. Compatibility claims are limited to the subset tested above.
+
+A real Jev smoke verification is recorded in [docs/live-verification.json](docs/live-verification.json). It used only synthetic examples and made no store/workflow changes.

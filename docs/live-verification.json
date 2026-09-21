@@ -1,0 +1,25 @@
+{
+  "at": "2026-09-21T12:49:22.941Z",
+  "calls": 4,
+  "maxCalls": 4,
+  "model": "jev-1.13.0",
+  "syntheticInputs": true,
+  "externalWrites": false,
+  "migration": {
+    "outcome": "billing",
+    "latencyMs": 648.49,
+    "scope": "Direct Jev probe, no Dify runtime"
+  },
+  "catalog": {
+    "advice": "identical",
+    "requiresReview": true,
+    "scope": "Read-only pair advice; no WooCommerce writes"
+  },
+  "hub": {
+    "outcomes": [
+      "billing",
+      "technical"
+    ],
+    "scope": "Actual Worker code and SQL with live Jev, local in-memory DB; not a hosted smoke test"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "name": "@gbesse/decision-migrate",
   "description": "Inspect and migrate finite Dify classifiers to Jev with reviewable patches and measured comparisons.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "license": "MIT",
   "engines": {
@@ -32,7 +32,8 @@
     "test": "node --test tests/*.test.mjs",
     "check": "node scripts/check.mjs",
     "start": "node src/server.mjs",
-    "demo": "node src/server.mjs --demo"
+    "demo": "node src/server.mjs --demo",
+    "demo:patch": "node examples/patch-audit.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0"

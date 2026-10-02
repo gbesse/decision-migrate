@@ -16,6 +16,10 @@ Node 24 or later. `npm ci --ignore-scripts`, then `npm run demo`. Open the priva
 
 Comparison runs an independent DecisionPack probe against recorded baseline outcomes. It does **not** execute the original LLM or reproduce Dify's full prompt protocol. Savings are not claimed: absent latency/cost observations remain absent. Up to 20 calls and an 85-second overall comparison deadline; rows not attempted after expiry are marked explicitly. Individual calls have a 30-second timeout.
 
+## Inspect a minimal migration patch offline
+
+`npm run demo:patch` reads the bundled synthetic Dify classifier, creates a reviewable patch and asserts that category IDs and graph edges remain identical. It does not start Dify, call Jev or import the modified workflow. Review the patch and test it in your target Dify version before switching traffic.
+
 ## Supported subset and verification
 
 Text Chat classifiers, literal instructions, 2–255 unique finite categories, two-part input selectors. Memory, vision, templated instructions, malformed classes and unsupported DSL versions are rejected. Plugin dependency hashes are never guessed or rewritten; the official provider must be installed separately.

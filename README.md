@@ -39,3 +39,10 @@ Uses DecisionPacks for validated finite inference and Decision Workbench for its
 Reviewed 2026-09-21. Compatibility claims are limited to the subset tested above.
 
 A real Jev smoke verification is recorded in [docs/live-verification.json](docs/live-verification.json). It used only synthetic examples and made no store/workflow changes.
+
+
+FR : Les comparaisons figent le workflow et tous les cas de référence avant l’inférence ; `sourceFingerprint` lie le rapport au workflow inspecté. Une mutation par callback ne change ni la catégorie de référence ni la latence observée. Les erreurs enregistrées sont des diagnostics fixes FR/EN/ES, sans message fournisseur brut. Le rapport contient toujours les requêtes utilisateur : vérifiez-les avant partage. Ces checks ne prouvent pas une exécution Dify ou un gain de qualité.
+
+EN: Comparisons snapshot the workflow and all baseline cases before inference; `sourceFingerprint` binds the report to the inspected workflow. Callback mutation changes neither baseline categories nor observed latency. Stored errors use fixed FR/EN/ES diagnostics without raw provider messages. Reports still contain user queries: review them before sharing. These checks do not establish Dify execution or a quality gain.
+
+ES: Las comparaciones fijan workflow y casos de referencia antes de la inferencia; `sourceFingerprint` vincula el informe al workflow inspeccionado. Mutaciones por callbacks no cambian categorías de referencia ni latencia observada. Los errores guardados usan diagnósticos fijos FR/EN/ES sin mensajes brutos del proveedor. Los informes siguen conteniendo consultas del usuario: revíselas antes de compartir. No prueban ejecución Dify ni mejora de calidad.

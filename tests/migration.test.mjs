@@ -16,3 +16,16 @@ test('comparison validates all cases before spending and distinguishes disagreem
  const result=await compare(flow,'classifier',[{query:'API error',baseline:'technical'}],{provider,maxCalls:1,mode:'synthetic'});assert.equal(result.disagreements,1);assert.equal(result.costSavings,null);assert.equal(result.results[0].baselineLatencyMs,null);
  const failed=await compare(flow,'classifier',[{query:'API error',baseline:'technical'}],{provider:async()=>{throw Error('provider unavailable');},maxCalls:1});assert.equal(failed.failures,1);assert.equal(failed.results[0].record,undefined);
 });
+
+
+test('comparison snapshots baseline cases and workflow identity before async inference',async()=>{
+ const flow=parseWorkflow(source),before=inspect(flow).sourceFingerprint,cases=[{query:'original',baseline:'technical',latencyMs:12},{query:'next',baseline:'technical',latencyMs:34}];let calls=0;
+ const provider=async()=>{calls++;cases[0].baseline='billing';cases[0].latencyMs=999;cases[1].query='changed';cases[1].baseline='billing';flow.workflow.graph.nodes[1].data.instruction='changed';return {model:'jev-1.13.0',answers:{route:{type:'choice',choice:'billing',confidence:.9,probabilities:{billing:.9,technical:.1}}}};};
+ const report=await compare(flow,'classifier',cases,{provider,maxCalls:2,mode:'synthetic'});
+ assert.equal(report.sourceFingerprint,before);assert.equal(report.disagreements,2);assert.equal(report.results[0].baselineLatencyMs,12);assert.equal(report.results[1].state.query,'next');assert.equal(calls,2);
+});
+test('provider diagnostics are absent from comparison records',async()=>{
+ const report=await compare(parseWorkflow(source),'classifier',[{query:'q',baseline:'billing'}],{provider:async()=>{throw Error('synthetic-private-diagnostic');}});
+ assert.equal(report.failures,1);assert.doesNotMatch(JSON.stringify(report),/synthetic-private-diagnostic/);
+ for(const text of ['Échec de comparaison','Comparison failed','Falló la comparación'])assert.ok(report.results[0].error.includes(text));
+});

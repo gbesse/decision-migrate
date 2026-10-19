@@ -46,3 +46,11 @@ FR : Les comparaisons figent le workflow et tous les cas de référence avant l�
 EN: Comparisons snapshot the workflow and all baseline cases before inference; `sourceFingerprint` binds the report to the inspected workflow. Callback mutation changes neither baseline categories nor observed latency. Stored errors use fixed FR/EN/ES diagnostics without raw provider messages. Reports still contain user queries: review them before sharing. These checks do not establish Dify execution or a quality gain.
 
 ES: Las comparaciones fijan workflow y casos de referencia antes de la inferencia; `sourceFingerprint` vincula el informe al workflow inspeccionado. Mutaciones por callbacks no cambian categorías de referencia ni latencia observada. Los errores guardados usan diagnósticos fijos FR/EN/ES sin mensajes brutos del proveedor. Los informes siguen conteniendo consultas del usuario: revíselas antes de compartir. No prueban ejecución Dify ni mejora de calidad.
+
+## Contrat des branches / Branch contract / Contrato de ramas
+
+FR — Avant migration ou comparaison, chaque catégorie doit avoir au moins une branche déclarée vers un nœud existant ; les sorties inconnues sont refusées. `routingAudit()` expose catégories, destinations et anomalies ; l’inspection et le résultat de migration gardent ce reçu. Le panneau désactive les actions sans nœud compatible et explique les anomalies en FR/EN/ES. Le sous-ensemble exige ces routes explicites ; il n’exécute ni ne valide tout le moteur Dify.
+
+EN — Before migration or comparison, every category must have at least one declared branch to an existing node; unknown output handles are rejected. `routingAudit()` exposes categories, destinations and anomalies; inspection and migration results retain this receipt. The panel disables actions without a compatible node and explains anomalies in FR/EN/ES. This subset requires explicit routes; it neither executes nor validates the entire Dify engine.
+
+ES — Antes de migrar o comparar, cada categoría debe tener al menos una rama declarada a un nodo existente; se rechazan salidas desconocidas. `routingAudit()` expone categorías, destinos y anomalías; inspección y resultado conservan el recibo. El panel desactiva acciones sin nodo compatible y explica anomalías en FR/EN/ES. Este subconjunto exige rutas explícitas; no ejecuta ni valida todo el motor Dify.

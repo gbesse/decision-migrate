@@ -9,7 +9,8 @@ export function parseWorkflow(text){
  const flow=doc.toJS({maxAliasCount:0});ensure(flow?.kind==='app'&&flow.version==='0.3.1','Supported Dify DSL version: 0.3.1');
  ensure(Array.isArray(flow.workflow?.graph?.nodes)&&Array.isArray(flow.workflow.graph.edges),'Dify workflow graph required');
  ensure(flow.workflow.graph.nodes.length<=500,'Maximum 500 nodes');
- ensure(new Set(flow.workflow.graph.nodes.map(n=>n.id)).size===flow.workflow.graph.nodes.length,'Duplicate node ids');return flow;
+ ensure(flow.workflow.graph.nodes.every(n=>n&&typeof n==='object'&&!Array.isArray(n)&&typeof n.id==='string'&&n.id.trim().length>0),'Identifiants de nœud non vides et textuels requis / Node identities must be nonblank strings / Identidades de nodo deben ser cadenas no vacías');
+ ensure(new Set(flow.workflow.graph.nodes.map(n=>n.id)).size===flow.workflow.graph.nodes.length,'Identifiants de nœud dupliqués / Duplicate node ids / Identidades de nodo duplicadas');return flow;
 }
 function unsupported(node,flow){
  const d=node.data,reasons=[];

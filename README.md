@@ -54,3 +54,11 @@ FR — Avant migration ou comparaison, chaque catégorie doit avoir au moins une
 EN — Before migration or comparison, every category must have at least one declared branch to an existing node; unknown output handles are rejected. `routingAudit()` exposes categories, destinations and anomalies; inspection and migration results retain this receipt. The panel disables actions without a compatible node and explains anomalies in FR/EN/ES. This subset requires explicit routes; it neither executes nor validates the entire Dify engine.
 
 ES — Antes de migrar o comparar, cada categoría debe tener al menos una rama declarada a un nodo existente; se rechazan salidas desconocidas. `routingAudit()` expone categorías, destinos y anomalías; inspección y resultado conservan el recibo. El panel desactiva acciones sin nodo compatible y explica anomalías en FR/EN/ES. Este subconjunto exige rutas explícitas; no ejecuta ni valida todo el motor Dify.
+
+## Graph identity boundary / Identifiants du graphe / Identidades del grafo
+
+FR — Le parseur refuse les identifiants de nœud non textuels ou blancs, y compris sur les nœuds hors du classifieur choisi, avant inspection ou migration. Les identifiants valides restent littéraux.
+
+EN — The parser rejects nonstring or blank node identities, including nodes outside the selected classifier, before inspection or migration. Valid identities remain literal.
+
+ES — El analizador rechaza identidades de nodo no textuales o vacías, incluso fuera del clasificador elegido, antes de inspeccionar o migrar. Las identidades válidas se conservan literalmente.

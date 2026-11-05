@@ -57,3 +57,10 @@ export function routingAudit(flow,nodeId){
  const danglingTargets=outgoing.filter(e=>typeof e.target!=='string'||!ids.has(e.target)).map(e=>({edgeId:e.id??null,target:e.target??null}));
  return{branches,missingCategories,unknownHandles,danglingTargets,valid:!missingCategories.length&&!unknownHandles.length&&!danglingTargets.length};
 }
+
+export function verifyModelOnlyMigration(before,after,nodeId){
+ const source=parseWorkflow(JSON.stringify(before)),actual=parseWorkflow(JSON.stringify(after));const expected=migrate(source,nodeId,fingerprint(source)).workflow;
+ const differences=[];
+ const walk=(a,b,path)=>{if(fingerprint(a)===fingerprint(b))return;if(a===null||b===null||typeof a!=='object'||typeof b!=='object'||Array.isArray(a)!==Array.isArray(b)){differences.push(path||'/');return;}for(const key of new Set([...Object.keys(a),...Object.keys(b)])){const p=path+'/'+key.replaceAll('~','~0').replaceAll('/','~1');if(!Object.hasOwn(a,key)||!Object.hasOwn(b,key))differences.push(p);else walk(a[key],b[key],p);}};
+ walk(expected,actual,'');return {modelOnly:differences.length===0,unexpectedPaths:differences.slice(0,100),totalUnexpectedPaths:differences.length,expectedFingerprint:fingerprint(expected),actualFingerprint:fingerprint(actual),difyHostExecuted:false};
+}

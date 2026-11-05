@@ -62,3 +62,12 @@ FR — Le parseur refuse les identifiants de nœud non textuels ou blancs, y com
 EN — The parser rejects nonstring or blank node identities, including nodes outside the selected classifier, before inspection or migration. Valid identities remain literal.
 
 ES — El analizador rechaza identidades de nodo no textuales o vacías, incluso fuera del clasificador elegido, antes de inspeccionar o migrar. Las identidades válidas se conservan literalmente.
+
+
+## 2026-11-05 — FR / EN / ES
+
+FR : `verifyModelOnlyMigration(before,after,nodeId)` reconstruit la migration attendue puis compare tous les champs DSL, avec chemins inattendus en JSON Pointer. Une branche ou métadonnée modifiée fait échouer `modelOnly`. Vérification de documents, sans exécution d’un host Dify.
+
+EN: `verifyModelOnlyMigration(before,after,nodeId)` reconstructs expected migration then compares every DSL field, reporting unexpected JSON Pointer paths. Changed branches or metadata fail `modelOnly`. Document verification without Dify host execution.
+
+ES: `verifyModelOnlyMigration(before,after,nodeId)` reconstruye migración esperada y compara todos los campos DSL, informando rutas JSON Pointer inesperadas. Ramas o metadatos cambiados fallan `modelOnly`. Verificación documental sin ejecutar host Dify.
